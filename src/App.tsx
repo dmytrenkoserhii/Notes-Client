@@ -1,9 +1,7 @@
+import { AppProviders } from './providers';
+
 function App() {
-  return (
-    <>
-      <div>Notes</div>
-    </>
-  );
+  return <AppProviders />;
 }
 
 export default App;
