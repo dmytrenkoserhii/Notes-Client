@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router';
-import { Header } from '../components';
+import { Footer, Header } from '../components';
 import { Box } from '@mantine/core';
 
 export const AuthLayout: React.FC = () => {
@@ -11,6 +11,8 @@ export const AuthLayout: React.FC = () => {
       <main>
         <Outlet />
       </main>
+
+      <Footer />
     </Box>
   );
 };
