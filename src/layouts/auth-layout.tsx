@@ -1,16 +1,18 @@
 import React from 'react';
 import { Outlet } from 'react-router';
-import { Header } from '../components';
-import { Box } from '@mantine/core';
+import { Footer, Header } from '../components';
+import { Container, Stack } from '@mantine/core';
 
 export const AuthLayout: React.FC = () => {
   return (
-    <Box>
+    <Stack h="100vh" justify="space-between">
       <Header />
 
-      <main>
+      <Container component="main">
         <Outlet />
-      </main>
-    </Box>
+      </Container>
+
+      <Footer />
+    </Stack>
   );
 };
