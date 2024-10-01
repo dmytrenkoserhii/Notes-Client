@@ -22,7 +22,7 @@ const theme = createTheme({
 export const AppProviders: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={theme}>
+      <MantineProvider theme={theme} defaultColorScheme="auto">
         <RouterProvider router={router} />
       </MantineProvider>
     </QueryClientProvider>
