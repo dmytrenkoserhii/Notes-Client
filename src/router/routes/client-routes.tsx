@@ -1,9 +1,7 @@
 import { RouteObject } from 'react-router';
 import { AuthLayout, UnauthLayout } from '../../layouts';
 import Home from '../../pages/home';
-import { NotesLayout } from '../../features/notes/layouts/notes-layout';
-import { NotesPage } from '../../features/notes/pages/notes-page';
-import { UserPage } from '../../features/notes/pages/user-page';
+import { UserPage, NotesPage, NotesLayout } from '../../features/notes';
 
 export const CLIENT_ROUTES: RouteObject[] = [
   {
