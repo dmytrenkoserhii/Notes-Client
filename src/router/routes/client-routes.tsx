@@ -7,10 +7,12 @@ import {
   NotesLayout,
   TrashPage,
 } from '../../features/notes';
+import { NotFoundPage } from '../components';
 
 export const CLIENT_ROUTES: RouteObject[] = [
   {
     element: <AuthLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         element: <NotesLayout />,
