@@ -8,12 +8,15 @@ export const NotesPage: React.FC = () => {
   return (
     <Box>
       <Flex justify="space-between" align="center">
-        <Box w="33%" /> {/* Spacer */}
+        <Box w="33%" />
+
         <CreateNoteForm />
+
         <Box w="33%" style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Sort />
         </Box>
       </Flex>
+
       <NoteCardsList />
     </Box>
   );
