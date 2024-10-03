@@ -1,6 +1,9 @@
 export const DUMMY_USER = {
   id: 1,
   email: 'dmtrnk.srg@gmail.com',
+  username: 'dmtrnk',
+  phone: '+380934207697',
+  birthDate: new Date('1994-06-27'),
   hashedPassword: '$2b$10$abcdefghijklmnopqrstuvwxyz123456',
   isAccountFilled: true,
   refreshToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
