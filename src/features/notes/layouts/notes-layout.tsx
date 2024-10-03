@@ -8,8 +8,10 @@ export const NotesLayout: React.FC = () => {
     <Center>
       <Container w="80rem" m={0} maw="80rem">
         <Flex justify="space-between">
-          <Navbar />
-          <Flex direction="column" flex="1" p="md">
+          <Container w="12rem">
+            <Navbar />
+          </Container>
+          <Flex direction="column" flex="1">
             <Outlet />
           </Flex>
         </Flex>
