@@ -27,7 +27,7 @@ const Home: React.FC = () => {
             <Card.Section>
               <FaFileAlt
                 size={50}
-                color="green"
+                color="cyan"
                 style={{ margin: '1rem auto', display: 'block' }}
               />
             </Card.Section>
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
             to="/notes"
             fullWidth
             variant="gradient"
-            gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+            gradient={{ from: 'cyan', to: 'teal', deg: 105 }}
           >
             Go to Notes
           </Button>
