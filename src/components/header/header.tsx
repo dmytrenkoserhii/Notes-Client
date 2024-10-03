@@ -10,6 +10,7 @@ import { BsGrid, BsList, BsPerson, BsSearch } from 'react-icons/bs';
 import React from 'react';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import styles from './header.module.css';
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -19,7 +20,9 @@ export const Header: React.FC = () => {
     <Center>
       <Group justify="space-between" p="md" w="80rem" wrap="nowrap">
         <Group>
-          <Title order={1}>Notes</Title>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Title order={1}>Notes</Title>
+          </Link>
         </Group>
         <TextInput
           placeholder="Search notes..."
