@@ -1,6 +1,7 @@
 import { NavLink, Stack } from '@mantine/core';
 import React from 'react';
-import { MdDelete, MdFolder, MdNote } from 'react-icons/md';
+import { BsPerson } from 'react-icons/bs';
+import { MdDelete, MdNote } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 import { useLocation } from 'react-router-dom';
@@ -26,7 +27,7 @@ export const Navbar: React.FC = () => {
       />
       <NavLink
         label="User"
-        leftSection={<MdFolder size="1rem" />}
+        leftSection={<BsPerson size="1rem" />}
         active={location.pathname === '/user'}
         component={Link}
         to="/user"
