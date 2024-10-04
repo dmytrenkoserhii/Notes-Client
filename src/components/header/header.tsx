@@ -11,10 +11,11 @@ import React from 'react';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import styles from './header.module.css';
 import { Link } from 'react-router-dom';
+import { NoteViewContext } from '../../contexts';
 
 export const Header: React.FC = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const [isGridView, setIsGridView] = React.useState(true);
+  const { isGridView, setIsGridView } = React.useContext(NoteViewContext);
 
   return (
     <Center>
@@ -30,7 +31,7 @@ export const Header: React.FC = () => {
           className={styles.searchInput}
         />
         <Group>
-          <ActionIcon onClick={() => setIsGridView((view) => !view)}>
+          <ActionIcon onClick={setIsGridView}>
             {isGridView ? <BsGrid size={20} /> : <BsList size={20} />}
           </ActionIcon>
           <ActionIcon>

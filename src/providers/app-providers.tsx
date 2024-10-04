@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from '../router';
 import '@mantine/core/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
+import { NoteViewContextProvider } from '../contexts';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,9 +23,11 @@ const theme = createTheme({
 export const AppProviders: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={theme} defaultColorScheme="auto">
-        <RouterProvider router={router} />
-      </MantineProvider>
+      <NoteViewContextProvider>
+        <MantineProvider theme={theme} defaultColorScheme="auto">
+          <RouterProvider router={router} />
+        </MantineProvider>
+      </NoteViewContextProvider>
     </QueryClientProvider>
   );
 };
