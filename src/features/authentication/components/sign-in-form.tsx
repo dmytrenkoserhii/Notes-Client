@@ -51,8 +51,17 @@ export const SignInForm: React.FC = () => {
   };
 
   return (
-    <Paper shadow="md" radius="md" p="xl" withBorder w={600}>
-      <Title order={2} ta="center" mt="md" mb={50}>
+    <Paper
+      shadow="md"
+      radius="md"
+      p="xl"
+      withBorder
+      maw={450}
+      miw={400}
+      mih={500}
+      mx="auto"
+    >
+      <Title order={2} ta="center" mb="lg">
         Welcome back!
       </Title>
 
@@ -62,6 +71,7 @@ export const SignInForm: React.FC = () => {
             required
             label="Email / Username"
             placeholder="your@email.com"
+            size="md"
             {...form.getInputProps('email')}
           />
 
@@ -69,10 +79,11 @@ export const SignInForm: React.FC = () => {
             required
             label="Password"
             placeholder="Your password"
+            size="md"
             {...form.getInputProps('password')}
           />
 
-          <Group justify="space-between">
+          <Group justify="apart" mt="md">
             <Checkbox
               label="Remember me"
               {...form.getInputProps('remember', { type: 'checkbox' })}
@@ -82,7 +93,7 @@ export const SignInForm: React.FC = () => {
             </Anchor>
           </Group>
 
-          <Button type="submit" fullWidth mt="xl">
+          <Button type="submit" fullWidth size="md" mt="xl">
             Sign in
           </Button>
         </Stack>
@@ -90,14 +101,17 @@ export const SignInForm: React.FC = () => {
 
       <Divider label="Or continue with" labelPosition="center" my="lg" />
 
-      <Button variant="outline" fullWidth>
-        <FcGoogle size={20} style={{ marginRight: '8px' }} />
-        Continue with Google
+      <Button variant="outline" fullWidth size="md">
+        <FcGoogle size={20} style={{ marginRight: '10px' }} />
+        Google
       </Button>
 
-      <Group justify="center" mt="md">
+      <Group justify="apart" mt="xl">
         <Anchor component="button" type="button" size="sm">
           Don't have an account? Register
+        </Anchor>
+        <Anchor component="button" size="sm">
+          Need help?
         </Anchor>
       </Group>
     </Paper>

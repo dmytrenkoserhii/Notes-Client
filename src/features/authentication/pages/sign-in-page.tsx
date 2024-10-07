@@ -4,7 +4,7 @@ import { SignInForm } from '../components';
 
 export const SignInPage: React.FC = () => {
   return (
-    <Center>
+    <Center h="100vh">
       <SignInForm />
     </Center>
   );
