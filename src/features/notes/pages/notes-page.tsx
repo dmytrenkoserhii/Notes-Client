@@ -4,8 +4,11 @@ import { Sort } from '../components';
 import { NoteCardsList } from '../components/note-cards-list';
 import { CreateNoteForm } from '../components/create-note-form';
 import { NoteItemsList } from '../components/note-items-list';
+import { NoteViewContext } from '../../../contexts';
 
 export const NotesPage: React.FC = () => {
+  const { isGridView } = React.useContext(NoteViewContext);
+
   return (
     <Box>
       <Flex justify="space-between" align="center">
@@ -18,8 +21,7 @@ export const NotesPage: React.FC = () => {
         </Box>
       </Flex>
 
-      <NoteCardsList />
-      <NoteItemsList />
+      {isGridView ? <NoteCardsList /> : <NoteItemsList />}
     </Box>
   );
 };

@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
         />
         <Group>
           <ActionIcon onClick={setIsGridView}>
-            {isGridView ? <BsGrid size={20} /> : <BsList size={20} />}
+            {isGridView ? <BsList size={20} /> : <BsGrid size={20} />}
           </ActionIcon>
           <ActionIcon>
             <BsPerson size={20} />
