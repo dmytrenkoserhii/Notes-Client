@@ -18,6 +18,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthService } from '../services';
 import { SignInFormSchema } from '../schemas';
+import { Link } from 'react-router-dom';
 
 type SignInFormData = z.infer<typeof SignInFormSchema>;
 
@@ -107,7 +108,7 @@ export const SignInForm: React.FC = () => {
       </Button>
 
       <Group justify="apart" mt="xl">
-        <Anchor component="button" type="button" size="sm">
+        <Anchor component={Link} to="/sign-up" size="sm">
           Don't have an account? Register
         </Anchor>
         <Anchor component="button" size="sm">

@@ -124,7 +124,7 @@ export const SignUpForm: React.FC = () => {
       </Button>
 
       <Group justify="apart" mt="xl">
-        <Anchor component={Link} to="/auth/login" size="sm">
+        <Anchor component={Link} to="/sign-in" size="sm">
           Already have an account? Log in
         </Anchor>
         <Anchor component="button" size="sm">
