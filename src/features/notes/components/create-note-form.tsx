@@ -3,15 +3,22 @@ import React from 'react';
 import { useClickOutside } from '@mantine/hooks';
 import { CreateNoteSchema } from '../schemas';
 import { useForm, zodResolver } from '@mantine/form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { NotesService } from '../services';
 import { z } from 'zod';
+import { UsersService } from '../../user';
 
 export type CreateNoteFormData = z.infer<typeof CreateNoteSchema>;
 
 export const CreateNoteForm: React.FC = () => {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const queryClient = useQueryClient();
+
+  const { data: userData } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => UsersService.getCurrentUser(),
+    retry: false,
+  });
 
   const form = useForm<CreateNoteFormData>({
     validate: zodResolver(CreateNoteSchema),
@@ -41,7 +48,12 @@ export const CreateNoteForm: React.FC = () => {
   const handleSubmit = (data: CreateNoteFormData) => {
     if (data.title.trim() || data.content.trim()) {
       console.log('Creating note:', { data });
-      createNote(data);
+      const requestData = {
+        ...data,
+        userId: userData.id,
+      };
+
+      createNote(requestData);
     }
     setIsExpanded(false);
   };
