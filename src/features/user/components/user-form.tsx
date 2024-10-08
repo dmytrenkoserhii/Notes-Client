@@ -1,10 +1,10 @@
 import {
   Button,
   Container,
+  Fieldset,
   Group,
   Stack,
   TextInput,
-  Title,
 } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { userSchema } from '../schemas/user.schema';
@@ -31,41 +31,40 @@ export const UserForm = () => {
 
   return (
     <Container size="sm">
-      <Title order={2} mb="lg">
-        User Profile
-      </Title>
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Stack gap="md">
-          <TextInput
-            label="Email"
-            placeholder="your@email.com"
-            {...form.getInputProps('email')}
-          />
+        <Fieldset legend="Personal information">
+          <Stack gap="md">
+            <TextInput
+              label="Email"
+              placeholder="your@email.com"
+              {...form.getInputProps('email')}
+            />
 
-          <TextInput
-            label="Username"
-            placeholder="johndoe"
-            {...form.getInputProps('username')}
-          />
+            <TextInput
+              label="Username"
+              placeholder="johndoe"
+              {...form.getInputProps('username')}
+            />
 
-          <TextInput
-            label="Phone"
-            placeholder="+1234567890"
-            {...form.getInputProps('phone')}
-          />
+            <TextInput
+              label="Phone"
+              placeholder="+1234567890"
+              {...form.getInputProps('phone')}
+            />
 
-          <DatePickerInput
-            label="Birth Date"
-            placeholder="Pick a date"
-            {...form.getInputProps('birthDate')}
-          />
+            <DatePickerInput
+              label="Birth Date"
+              placeholder="Pick a date"
+              {...form.getInputProps('birthDate')}
+            />
 
-          <Group justify="flex-end" mt="xl">
-            <Button type="submit" size="md">
-              Save Changes
-            </Button>
-          </Group>
-        </Stack>
+            <Group justify="flex-end" mt="xl">
+              <Button type="submit" size="md">
+                Save Changes
+              </Button>
+            </Group>
+          </Stack>
+        </Fieldset>
       </form>
     </Container>
   );
