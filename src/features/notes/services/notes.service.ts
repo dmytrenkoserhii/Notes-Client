@@ -12,7 +12,7 @@ export const NotesService = {
     const response = await privateAxios.post<Note>('/notes', createNoteData);
     return response.data;
   },
-  async editNote(id: string, editNoteData: EditNoteRequestData): Promise<Note> {
+  async editNote(id: number, editNoteData: EditNoteRequestData): Promise<Note> {
     const response = await privateAxios.put<Note>(`/notes/${id}`, editNoteData);
     return response.data;
   },
