@@ -52,7 +52,7 @@ export const UserForm: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Center style={{ height: '100vh' }}>
+      <Center h="50vh">
         <Loader size="xl" />
       </Center>
     );

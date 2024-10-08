@@ -5,10 +5,9 @@ import { ModalNoteForm } from './modal-note-form';
 
 interface NoteItemProps {
   note: Note;
-  onUpdate: (updatedNote: Note) => void;
 }
 
-export const NoteItem: React.FC<NoteItemProps> = ({ note, onUpdate }) => {
+export const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleCardClick = () => {
@@ -44,20 +43,11 @@ export const NoteItem: React.FC<NoteItemProps> = ({ note, onUpdate }) => {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
-              // WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
               flex: 1,
             }}
           >
             {note.content}
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa
-            nostrum officiis, corporis iure, voluptatibus nesciunt maxime dicta
-            dolorem aut dolor, nobis molestiae placeat consequuntur facere!
-            Exercitationem eaque ratione repellat voluptatibus? Lorem, ipsum
-            dolor sit amet consectetur adipisicing elit. Magnam libero ipsa
-            mollitia dolorem, nam ipsum dolorum, asperiores repudiandae
-            quibusdam aliquam eos quam? Ex mollitia rem praesentium a explicabo,
-            tenetur possimus.
           </Text>
         </Stack>
       </Card>
@@ -65,7 +55,6 @@ export const NoteItem: React.FC<NoteItemProps> = ({ note, onUpdate }) => {
         note={note}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        onSave={onUpdate}
       />
     </>
   );

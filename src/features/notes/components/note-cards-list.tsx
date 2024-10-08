@@ -1,4 +1,4 @@
-import { Grid } from '@mantine/core';
+import { Center, Grid, Loader } from '@mantine/core';
 import React from 'react';
 import { NoteCard } from './note-card';
 import { NotesQueryParams } from '../types';
@@ -19,11 +19,7 @@ export const NoteCardsList: React.FC = () => {
     page: queryParams.page,
   };
 
-  const {
-    data: notesData,
-    error,
-    isLoading,
-  } = useQuery({
+  const { data: notesData, isLoading } = useQuery({
     queryKey: ['notes', requestQueryParams],
     queryFn: () => {
       if (!requestQueryParams.limit || !requestQueryParams.page) return;
@@ -48,6 +44,14 @@ export const NoteCardsList: React.FC = () => {
       return;
     }
   }, []);
+
+  if (isLoading) {
+    return (
+      <Center h="50vh">
+        <Loader size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <Grid mt={20}>

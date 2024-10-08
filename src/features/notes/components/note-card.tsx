@@ -1,5 +1,5 @@
 import { Card, Stack, Text, Title } from '@mantine/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { Note } from '../types/note.interface';
 import { ModalNoteForm } from './modal-note-form';
 
@@ -8,7 +8,7 @@ interface NoteCardProps {
 }
 
 export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleCardClick = () => {
     setIsModalOpen(true);
