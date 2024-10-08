@@ -28,6 +28,7 @@ export const Header: React.FC = () => {
   const { isGridView, setIsGridView } = React.useContext(NoteViewContext);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { searchQuery, setSearchQuery } = React.useContext(NoteViewContext);
 
   const { mutate: logOut } = useMutation({
     mutationFn: () => AuthService.logoutUser(),
@@ -53,6 +54,8 @@ export const Header: React.FC = () => {
           placeholder="Search notes..."
           leftSection={<BsSearch size={14} />}
           className={styles.searchInput}
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.currentTarget.value)}
         />
         <Group>
           <ActionIcon onClick={setIsGridView}>

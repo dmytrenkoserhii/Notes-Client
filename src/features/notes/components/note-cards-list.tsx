@@ -6,9 +6,11 @@ import { useSearchParams } from 'react-router-dom';
 import { getCurrentQueryParams } from '../../../utils';
 import { NotesService } from '../services';
 import { useQuery } from '@tanstack/react-query';
+import { NoteViewContext } from '../../../contexts';
 
 export const NoteCardsList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { searchQuery } = React.useContext(NoteViewContext);
 
   const queryParams = React.useMemo(() => {
     return getCurrentQueryParams(searchParams);
@@ -45,6 +47,15 @@ export const NoteCardsList: React.FC = () => {
     }
   }, []);
 
+  const filteredNotes = React.useMemo(() => {
+    if (!notesData?.items) return [];
+    return notesData.items.filter(
+      (note) =>
+        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        note.content.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [notesData?.items, searchQuery]);
+
   if (isLoading) {
     return (
       <Center h="50vh">
@@ -55,7 +66,7 @@ export const NoteCardsList: React.FC = () => {
 
   return (
     <Grid mt={20}>
-      {notesData?.items.map((note) => (
+      {filteredNotes.map((note) => (
         <Grid.Col span={3} key={note.id}>
           <NoteCard note={note} />
         </Grid.Col>
