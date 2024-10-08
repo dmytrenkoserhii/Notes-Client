@@ -1,23 +1,59 @@
 import { Grid } from '@mantine/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { NoteCard } from './note-card';
-import { DUMMY_NOTES } from '../../../DUMMY_DATA';
-import { Note } from '../types/note.interface';
+import { NotesQueryParams } from '../types';
+import { useSearchParams } from 'react-router-dom';
+import { getCurrentQueryParams } from '../../../utils';
+import { NotesService } from '../services';
+import { useQuery } from '@tanstack/react-query';
 
 export const NoteCardsList: React.FC = () => {
-  const [notes, setNotes] = useState(DUMMY_NOTES.items);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleNoteUpdate = (updatedNote: Note) => {
-    setNotes(
-      notes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
-    );
+  const queryParams = React.useMemo(() => {
+    return getCurrentQueryParams(searchParams);
+  }, [searchParams]);
+
+  const requestQueryParams: NotesQueryParams = {
+    limit: queryParams.limit,
+    page: queryParams.page,
   };
+
+  const {
+    data: notesData,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ['notes', requestQueryParams],
+    queryFn: () => {
+      if (!requestQueryParams.limit || !requestQueryParams.page) return;
+
+      return NotesService.getAllNotes(requestQueryParams);
+    },
+  });
+
+  React.useEffect(() => {
+    if (!queryParams.limit && !queryParams.page) {
+      setSearchParams(
+        {
+          ...queryParams,
+          limit: queryParams.limit || '16',
+          page: queryParams.page || '1',
+        },
+        {
+          replace: true,
+        }
+      );
+
+      return;
+    }
+  }, []);
 
   return (
     <Grid mt={20}>
-      {notes.map((note) => (
+      {notesData?.items.map((note) => (
         <Grid.Col span={3} key={note.id}>
-          <NoteCard note={note} onUpdate={handleNoteUpdate} />
+          <NoteCard note={note} />
         </Grid.Col>
       ))}
     </Grid>
