@@ -32,6 +32,7 @@ export const CreateNoteForm: React.FC = () => {
     mutationFn: (createNoteData: CreateNoteFormData) =>
       NotesService.createNote(createNoteData),
     onSuccess: () => {
+      form.reset();
       queryClient.invalidateQueries({ queryKey: ['notes'] });
     },
     onError: (error: Error) => {
@@ -47,7 +48,6 @@ export const CreateNoteForm: React.FC = () => {
 
   const handleSubmit = (data: CreateNoteFormData) => {
     if (data.title.trim() || data.content.trim()) {
-      console.log('Creating note:', { data });
       const requestData = {
         ...data,
         userId: userData.id,
@@ -75,6 +75,7 @@ export const CreateNoteForm: React.FC = () => {
                 placeholder="Title"
                 mb="sm"
                 {...form.getInputProps('title')}
+                autoFocus
               />
               <Textarea
                 placeholder="Take a note..."

@@ -9,16 +9,21 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
-import { userSchema } from '../schemas/user.schema';
+import { userSchema } from '../schemas';
 import { z } from 'zod';
 import { DatePickerInput } from '@mantine/dates';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { UsersService } from '../services';
 import React from 'react';
+import { UpdateAccountRequestData } from '../types';
+import { notifications } from '@mantine/notifications';
+import dayjs from 'dayjs';
 
 type UserFormValues = z.infer<typeof userSchema>;
 
 export const UserForm: React.FC = () => {
+  const queryClient = useQueryClient();
+
   const { data: userData, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: () => UsersService.getCurrentUser(),
@@ -27,7 +32,6 @@ export const UserForm: React.FC = () => {
 
   const form = useForm<UserFormValues>({
     initialValues: {
-      email: '',
       username: '',
       phone: '',
       birthDate: new Date(),
@@ -35,19 +39,37 @@ export const UserForm: React.FC = () => {
     validate: zodResolver(userSchema),
   });
 
+  const { mutate: updateAccount } = useMutation({
+    mutationFn: (updatedAccount: UpdateAccountRequestData) =>
+      UsersService.updateAccount(updatedAccount),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      notifications.show({
+        title: 'Account Updated',
+        message: 'The account has been successfully updated.',
+        color: 'cyan',
+      });
+    },
+  });
+
   React.useEffect(() => {
     if (userData) {
       form.setValues({
-        email: userData.email || '',
         username: userData.account.username || '',
-        phone: userData.phone || '',
-        birthDate: userData.birthDate || new Date(),
+        phone: userData.account.phone || '',
+        birthDate: userData.account.birthDate
+          ? dayjs(userData.account.birthDate).toDate()
+          : new Date(),
       });
     }
   }, [userData]);
 
   const handleSubmit = (values: UserFormValues) => {
-    console.log('Updated values:', values);
+    const updatedValues = {
+      ...values,
+      birthDate: values.birthDate.toISOString(),
+    };
+    updateAccount(updatedValues);
   };
 
   if (isLoading) {
@@ -63,12 +85,6 @@ export const UserForm: React.FC = () => {
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Fieldset legend="Personal information">
           <Stack gap="md">
-            <TextInput
-              label="Email"
-              placeholder="your@email.com"
-              {...form.getInputProps('email')}
-            />
-
             <TextInput
               label="Username"
               placeholder="johndoe"

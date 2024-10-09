@@ -5,6 +5,7 @@ import { router } from '../router';
 import '@mantine/core/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 import { NoteViewContextProvider } from '../contexts';
+import { Notifications } from '@mantine/notifications';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ export const AppProviders: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <NoteViewContextProvider>
         <MantineProvider theme={theme} defaultColorScheme="auto">
+          <Notifications position="top-right" />
           <RouterProvider router={router} />
         </MantineProvider>
       </NoteViewContextProvider>
