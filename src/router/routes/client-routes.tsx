@@ -4,6 +4,8 @@ import Home from '../../pages/home';
 import { NotesPage, NotesLayout, TrashPage } from '../../features/notes';
 import { NotFoundPage } from '../components';
 import { UserPage } from '../../features/user';
+import { SignInPage } from '../../features/authentication';
+import { SignUpPage } from '../../features/authentication';
 
 export const CLIENT_ROUTES: RouteObject[] = [
   {
@@ -36,6 +38,14 @@ export const CLIENT_ROUTES: RouteObject[] = [
         index: true,
         path: '/',
         element: <Home />,
+      },
+      {
+        path: 'sign-in',
+        element: <SignInPage />,
+      },
+      {
+        path: 'sign-up',
+        element: <SignUpPage />,
       },
     ],
   },
