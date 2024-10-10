@@ -3,6 +3,7 @@ import React from 'react';
 import { Sort } from '../components';
 import { NoteCardsList } from '../components/note-cards-list';
 import { CreateNoteForm } from '../components/create-note-form';
+import { NoteItemsList } from '../components/note-items-list';
 
 export const NotesPage: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ export const NotesPage: React.FC = () => {
       </Flex>
 
       <NoteCardsList />
+      <NoteItemsList />
     </Box>
   );
 };
