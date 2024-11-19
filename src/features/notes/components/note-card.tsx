@@ -5,10 +5,9 @@ import { ModalNoteForm } from './modal-note-form';
 
 interface NoteCardProps {
   note: Note;
-  onUpdate: (updatedNote: Note) => void;
 }
 
-export const NoteCard: React.FC<NoteCardProps> = ({ note, onUpdate }) => {
+export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCardClick = () => {
@@ -57,7 +56,6 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note, onUpdate }) => {
         note={note}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        onSave={onUpdate}
       />
     </>
   );

@@ -12,6 +12,9 @@ import {
   Group,
   Stack,
   Anchor,
+  Paper,
+  Title,
+  Divider,
 } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { SignUpRequestData } from '../types';
@@ -54,13 +57,27 @@ export const SignUpForm: React.FC = () => {
   };
 
   return (
-    <Stack gap="md" style={{ maxWidth: 400 }} mx="auto">
+    <Paper
+      shadow="md"
+      radius="md"
+      p="xl"
+      withBorder
+      maw={450}
+      miw={400}
+      mih={600}
+      mx="auto"
+    >
+      <Title order={2} ta="center" mb="lg">
+        Create an account
+      </Title>
+
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Stack gap="sm">
+        <Stack gap="md">
           <TextInput
             required
             label="Username"
             placeholder="Your username"
+            size="md"
             {...form.getInputProps('username')}
           />
 
@@ -68,6 +85,7 @@ export const SignUpForm: React.FC = () => {
             required
             label="Email address"
             placeholder="hello@example.com"
+            size="md"
             {...form.getInputProps('email')}
           />
 
@@ -75,6 +93,7 @@ export const SignUpForm: React.FC = () => {
             required
             label="Password"
             placeholder="Your password"
+            size="md"
             {...form.getInputProps('password')}
           />
 
@@ -82,6 +101,7 @@ export const SignUpForm: React.FC = () => {
             required
             label="Confirm password"
             placeholder="Confirm your password"
+            size="md"
             {...form.getInputProps('passwordConfirmation')}
           />
 
@@ -90,28 +110,27 @@ export const SignUpForm: React.FC = () => {
             {...form.getInputProps('terms', { type: 'checkbox' })}
           />
 
-          <Button type="submit" fullWidth>
+          <Button type="submit" fullWidth size="md" mt="xl">
             Register
-          </Button>
-
-          <Button variant="outline" fullWidth>
-            <FcGoogle size={20} style={{ marginRight: '10px' }} />
-            Continue with Google
           </Button>
         </Stack>
       </form>
 
-      <Group justify="center" gap="xs">
-        <Anchor component={Link} to="/auth/login" size="sm">
+      <Divider label="Or continue with" labelPosition="center" my="lg" />
+
+      <Button variant="outline" fullWidth size="md">
+        <FcGoogle size={20} style={{ marginRight: '10px' }} />
+        Google
+      </Button>
+
+      <Group justify="apart" mt="xl">
+        <Anchor component={Link} to="/sign-in" size="sm">
           Already have an account? Log in
         </Anchor>
-      </Group>
-
-      <Group justify="center">
         <Anchor component="button" size="sm">
-          Didn't receive confirmation instructions?
+          Need help?
         </Anchor>
       </Group>
-    </Stack>
+    </Paper>
   );
 };

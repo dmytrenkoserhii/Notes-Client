@@ -2,20 +2,44 @@ import {
   ActionIcon,
   Center,
   Group,
+  Menu,
+  rem,
   TextInput,
   Title,
   useMantineColorScheme,
 } from '@mantine/core';
-import { BsGrid, BsList, BsPerson, BsSearch } from 'react-icons/bs';
+import {
+  BsBoxArrowRight,
+  BsGrid,
+  BsList,
+  BsPerson,
+  BsSearch,
+} from 'react-icons/bs';
 import React from 'react';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import styles from './header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NoteViewContext } from '../../contexts';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AuthService } from '../../features/authentication';
 
 export const Header: React.FC = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const { isGridView, setIsGridView } = React.useContext(NoteViewContext);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: logOut } = useMutation({
+    mutationFn: () => AuthService.logoutUser(),
+    onSuccess: () => {
+      queryClient.setQueryData(['user'], null);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      navigate('/');
+    },
+    onError: (error: Error) => {
+      console.error('Logout failed:', error);
+    },
+  });
 
   return (
     <Center>
@@ -32,11 +56,37 @@ export const Header: React.FC = () => {
         />
         <Group>
           <ActionIcon onClick={setIsGridView}>
-            {isGridView ? <BsGrid size={20} /> : <BsList size={20} />}
+            {isGridView ? <BsList size={20} /> : <BsGrid size={20} />}
           </ActionIcon>
-          <ActionIcon>
-            <BsPerson size={20} />
-          </ActionIcon>
+          <Menu>
+            <Menu.Target>
+              <ActionIcon>
+                <BsPerson size={20} />
+              </ActionIcon>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Item
+                leftSection={
+                  <BsPerson style={{ width: rem(14), height: rem(14) }} />
+                }
+                component={Link}
+                to="/user"
+              >
+                Profile
+              </Menu.Item>
+              <Menu.Item
+                leftSection={
+                  <BsBoxArrowRight
+                    style={{ width: rem(14), height: rem(14) }}
+                  />
+                }
+                onClick={() => logOut()}
+              >
+                Log out
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
           <ActionIcon onClick={() => toggleColorScheme()}>
             {colorScheme === 'dark' ? (
               <MdLightMode size={20} />
