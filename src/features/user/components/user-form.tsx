@@ -1,33 +1,62 @@
 import {
   Button,
+  Center,
   Container,
   Fieldset,
   Group,
+  Loader,
   Stack,
   TextInput,
 } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { userSchema } from '../schemas/user.schema';
 import { z } from 'zod';
-import { DUMMY_USER } from '../../../DUMMY_DATA';
 import { DatePickerInput } from '@mantine/dates';
+import { useQuery } from '@tanstack/react-query';
+import { UsersService } from '../services';
+import React from 'react';
 
 type UserFormValues = z.infer<typeof userSchema>;
 
-export const UserForm = () => {
+export const UserForm: React.FC = () => {
+  const { data: userData, isLoading } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => UsersService.getCurrentUser(),
+    retry: false,
+  });
+
   const form = useForm<UserFormValues>({
     initialValues: {
-      email: DUMMY_USER.email,
-      username: DUMMY_USER.username || '',
-      phone: DUMMY_USER.phone || '',
-      birthDate: DUMMY_USER.birthDate || new Date(),
+      email: '',
+      username: '',
+      phone: '',
+      birthDate: new Date(),
     },
     validate: zodResolver(userSchema),
   });
 
+  React.useEffect(() => {
+    if (userData) {
+      form.setValues({
+        email: userData.email || '',
+        username: userData.account.username || '',
+        phone: userData.phone || '',
+        birthDate: userData.birthDate || new Date(),
+      });
+    }
+  }, [userData]);
+
   const handleSubmit = (values: UserFormValues) => {
     console.log('Updated values:', values);
   };
+
+  if (isLoading) {
+    return (
+      <Center h="50vh">
+        <Loader size="xl" />
+      </Center>
+    );
+  }
 
   return (
     <Container size="sm">

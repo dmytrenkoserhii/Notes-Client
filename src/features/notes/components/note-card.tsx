@@ -1,14 +1,17 @@
 import { Card, Stack, Text, Title } from '@mantine/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { Note } from '../types/note.interface';
 import { ModalNoteForm } from './modal-note-form';
+import { NoteViewContext } from '../../../contexts';
+import { HighlightedText } from './highlighted-text';
 
 interface NoteCardProps {
   note: Note;
 }
 
 export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const { searchQuery } = React.useContext(NoteViewContext);
 
   const handleCardClick = () => {
     setIsModalOpen(true);
@@ -35,9 +38,10 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
             lineClamp={2}
             style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
-            {note.title}
+            <HighlightedText text={note.title} highlight={searchQuery} />
           </Title>
           <Text
+            component="span"
             size="sm"
             style={{
               overflow: 'hidden',
@@ -48,7 +52,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
               flex: 1,
             }}
           >
-            {note.content}
+            <HighlightedText text={note.content} highlight={searchQuery} />
           </Text>
         </Stack>
       </Card>

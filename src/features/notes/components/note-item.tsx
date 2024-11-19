@@ -2,14 +2,16 @@ import React from 'react';
 import { Text, Card, Stack, Title } from '@mantine/core';
 import { Note } from '../types/note.interface';
 import { ModalNoteForm } from './modal-note-form';
+import { NoteViewContext } from '../../../contexts';
+import { HighlightedText } from './highlighted-text';
 
 interface NoteItemProps {
   note: Note;
-  onUpdate: (updatedNote: Note) => void;
 }
 
-export const NoteItem: React.FC<NoteItemProps> = ({ note, onUpdate }) => {
+export const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const { searchQuery } = React.useContext(NoteViewContext);
 
   const handleCardClick = () => {
     setIsModalOpen(true);
@@ -36,28 +38,20 @@ export const NoteItem: React.FC<NoteItemProps> = ({ note, onUpdate }) => {
             lineClamp={2}
             style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
           >
-            {note.title}
+            <HighlightedText text={note.title} highlight={searchQuery} />
           </Title>
           <Text
+            component="span"
             size="sm"
             style={{
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
-              // WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
               flex: 1,
             }}
           >
-            {note.content}
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa
-            nostrum officiis, corporis iure, voluptatibus nesciunt maxime dicta
-            dolorem aut dolor, nobis molestiae placeat consequuntur facere!
-            Exercitationem eaque ratione repellat voluptatibus? Lorem, ipsum
-            dolor sit amet consectetur adipisicing elit. Magnam libero ipsa
-            mollitia dolorem, nam ipsum dolorum, asperiores repudiandae
-            quibusdam aliquam eos quam? Ex mollitia rem praesentium a explicabo,
-            tenetur possimus.
+            <HighlightedText text={note.content} highlight={searchQuery} />
           </Text>
         </Stack>
       </Card>
@@ -65,7 +59,6 @@ export const NoteItem: React.FC<NoteItemProps> = ({ note, onUpdate }) => {
         note={note}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        onSave={onUpdate}
       />
     </>
   );
