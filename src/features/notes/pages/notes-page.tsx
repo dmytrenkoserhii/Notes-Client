@@ -1,13 +1,75 @@
 import { Box, Flex } from '@mantine/core';
 import React from 'react';
 import { Sort } from '../components';
-import { NoteCardsList } from '../components/note-cards-list';
-import { CreateNoteForm } from '../components/create-note-form';
-import { NoteItemsList } from '../components/note-items-list';
+import { NoteCardsList } from '../components';
+import { CreateNoteForm } from '../components';
+import { NoteItemsList } from '../components';
 import { NoteViewContext } from '../../../contexts';
+import { useSearchParams } from 'react-router-dom';
+import { getCurrentQueryParams } from '../../../utils';
+import { NotesService } from '../services';
+import { useQuery } from '@tanstack/react-query';
+import { NotesQueryParams } from '../types';
+import { SORT_OPTIONS } from '../constants';
 
 export const NotesPage: React.FC = () => {
   const { isGridView } = React.useContext(NoteViewContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleSortChange = (value: string) => {
+    setSearchParams(
+      {
+        ...queryParams,
+        sort: value,
+      },
+      {
+        replace: true,
+      }
+    );
+  };
+
+  const queryParams = React.useMemo(() => {
+    return getCurrentQueryParams(searchParams);
+  }, [searchParams]);
+
+  const requestQueryParams: NotesQueryParams = {
+    limit: queryParams.limit,
+    page: queryParams.page,
+    sort: queryParams.sort,
+    isDeleted: false,
+  };
+
+  const { data: notesData, isLoading } = useQuery({
+    queryKey: ['notes', requestQueryParams],
+    queryFn: () => {
+      if (
+        !requestQueryParams.limit ||
+        !requestQueryParams.page ||
+        !requestQueryParams.sort
+      )
+        return;
+
+      return NotesService.getAllNotes(requestQueryParams);
+    },
+  });
+
+  React.useEffect(() => {
+    if (!queryParams.limit && !queryParams.page) {
+      setSearchParams(
+        {
+          ...queryParams,
+          limit: queryParams.limit || '16',
+          page: queryParams.page || '1',
+          sort: queryParams.sort || SORT_OPTIONS[0].value,
+        },
+        {
+          replace: true,
+        }
+      );
+
+      return;
+    }
+  }, []);
 
   return (
     <Box>
@@ -17,11 +79,17 @@ export const NotesPage: React.FC = () => {
         <CreateNoteForm />
 
         <Box w="33%" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Sort />
+          <Sort value={queryParams.sort} onSortChange={handleSortChange} />
         </Box>
       </Flex>
 
-      {isGridView ? <NoteCardsList /> : <NoteItemsList />}
+      {isGridView
+        ? notesData && (
+            <NoteCardsList notes={notesData?.items} isLoading={isLoading} />
+          )
+        : notesData && (
+            <NoteItemsList notes={notesData?.items} isLoading={isLoading} />
+          )}
     </Box>
   );
 };

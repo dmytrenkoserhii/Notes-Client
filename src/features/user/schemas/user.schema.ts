@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 export const userSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
   username: z
     .string()
     .min(3, { message: 'Username must be at least 3 characters' }),

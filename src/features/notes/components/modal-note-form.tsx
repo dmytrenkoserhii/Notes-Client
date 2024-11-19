@@ -7,6 +7,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm, zodResolver } from '@mantine/form';
 import { NotesService } from '../services';
 import { MdDelete } from 'react-icons/md';
+import { EditNoteRequestData } from '../types';
+import { notifications } from '@mantine/notifications';
 
 interface ModalEditFormProps {
   note: Note;
@@ -43,14 +45,25 @@ export const ModalNoteForm: React.FC<ModalEditFormProps> = ({
       NotesService.editNote(note.id, updatedNote),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
+      notifications.show({
+        title: 'Note Edited',
+        message: 'The note has been successfully edited.',
+        color: 'cyan',
+      });
     },
   });
 
-  const { mutate: deleteNote } = useMutation({
-    mutationFn: () => NotesService.deleteNote(note.id),
+  const { mutate: moveToTrash } = useMutation({
+    mutationFn: (updatedNote: EditNoteRequestData) =>
+      NotesService.editNote(note.id, updatedNote),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
       onClose();
+      notifications.show({
+        title: 'Note Deleted',
+        message: 'The note has been successfully deleted.',
+        color: 'red',
+      });
     },
   });
 
@@ -60,7 +73,7 @@ export const ModalNoteForm: React.FC<ModalEditFormProps> = ({
   };
 
   const handleDelete = () => {
-    deleteNote();
+    moveToTrash({ isDeleted: true });
   };
 
   return (
@@ -82,6 +95,7 @@ export const ModalNoteForm: React.FC<ModalEditFormProps> = ({
           label="Content"
           placeholder="Enter note content"
           minRows={5}
+          autosize
           mb="md"
           {...form.getInputProps('content')}
         />
