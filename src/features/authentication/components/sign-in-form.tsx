@@ -53,65 +53,65 @@ export const SignInForm: React.FC = () => {
 
   return (
     <Paper
-      shadow="md"
-      radius="md"
-      p="xl"
+      shadow='md'
+      radius='md'
+      p='xl'
       withBorder
       maw={450}
       miw={400}
       mih={500}
-      mx="auto"
+      mx='auto'
     >
-      <Title order={2} ta="center" mb="lg">
+      <Title order={2} ta='center' mb='lg'>
         Welcome back!
       </Title>
 
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Stack gap="md">
+        <Stack gap='md'>
           <TextInput
             required
-            label="Email / Username"
-            placeholder="your@email.com"
-            size="md"
+            label='Email / Username'
+            placeholder='your@email.com'
+            size='md'
             {...form.getInputProps('email')}
           />
 
           <PasswordInput
             required
-            label="Password"
-            placeholder="Your password"
-            size="md"
+            label='Password'
+            placeholder='Your password'
+            size='md'
             {...form.getInputProps('password')}
           />
 
-          <Group justify="apart" mt="md">
+          <Group justify='apart' mt='md'>
             <Checkbox
-              label="Remember me"
+              label='Remember me'
               {...form.getInputProps('remember', { type: 'checkbox' })}
             />
-            <Anchor component="button" type="button" size="sm">
+            <Anchor component='button' type='button' size='sm'>
               Forgot password?
             </Anchor>
           </Group>
 
-          <Button type="submit" fullWidth size="md" mt="xl">
+          <Button type='submit' fullWidth size='md' mt='xl'>
             Sign in
           </Button>
         </Stack>
       </form>
 
-      <Divider label="Or continue with" labelPosition="center" my="lg" />
+      <Divider label='Or continue with' labelPosition='center' my='lg' />
 
-      <Button variant="outline" fullWidth size="md">
+      <Button variant='outline' fullWidth size='md'>
         <FcGoogle size={20} style={{ marginRight: '10px' }} />
         Google
       </Button>
 
-      <Group justify="apart" mt="xl">
-        <Anchor component={Link} to="/sign-up" size="sm">
+      <Group justify='apart' mt='xl'>
+        <Anchor component={Link} to='/sign-up' size='sm'>
           Don't have an account? Register
         </Anchor>
-        <Anchor component="button" size="sm">
+        <Anchor component='button' size='sm'>
           Need help?
         </Anchor>
       </Group>

@@ -80,28 +80,28 @@ export const ModalNoteForm: React.FC<ModalEditFormProps> = ({
     <Modal
       opened={isOpen}
       onClose={handleClose}
-      size="lg"
-      title="Edit your note"
+      size='lg'
+      title='Edit your note'
     >
       <Box>
         <TextInput
-          label="Title"
-          placeholder="Enter note title"
-          mb="md"
-          size="xl"
+          label='Title'
+          placeholder='Enter note title'
+          mb='md'
+          size='xl'
           {...form.getInputProps('title')}
         />
         <Textarea
-          label="Content"
-          placeholder="Enter note content"
+          label='Content'
+          placeholder='Enter note content'
           minRows={5}
           autosize
-          mb="md"
+          mb='md'
           {...form.getInputProps('content')}
         />
-        <Group justify="apart" mt="md">
+        <Group justify='apart' mt='md'>
           <Button
-            color="red"
+            color='red'
             leftSection={<MdDelete size={16} />}
             onClick={handleDelete}
           >

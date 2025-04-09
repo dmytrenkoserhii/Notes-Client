@@ -6,9 +6,9 @@ export const Footer: React.FC = () => {
   const currentYear = dayjs().format('YYYY');
 
   return (
-    <Box py="xs">
+    <Box py='xs'>
       <Divider py={4} />
-      <Group justify="center">
+      <Group justify='center'>
         <Text>Create by Serhii Dmytrenko © {currentYear}</Text>
       </Group>
     </Box>

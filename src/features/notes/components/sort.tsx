@@ -9,9 +9,9 @@ interface SortProps {
 
 export const Sort: React.FC<SortProps> = ({ value, onSortChange }) => {
   return (
-    <Box w="10rem">
+    <Box w='10rem'>
       <Select
-        placeholder="Newest"
+        placeholder='Newest'
         data={SORT_OPTIONS}
         value={value}
         onChange={(newValue) => onSortChange(newValue || '')}

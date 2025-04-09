@@ -25,8 +25,8 @@ export const AppProviders: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NoteViewContextProvider>
-        <MantineProvider theme={theme} defaultColorScheme="auto">
-          <Notifications position="top-right" />
+        <MantineProvider theme={theme} defaultColorScheme='auto'>
+          <Notifications position='top-right' />
           <RouterProvider router={router} />
         </MantineProvider>
       </NoteViewContextProvider>

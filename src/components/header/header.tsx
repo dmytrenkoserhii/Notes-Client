@@ -1,3 +1,7 @@
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import styles from './header.module.css';
 import {
   ActionIcon,
   Center,
@@ -15,12 +19,8 @@ import {
   BsPerson,
   BsSearch,
 } from 'react-icons/bs';
-import React from 'react';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
-import styles from './header.module.css';
-import { Link, useNavigate } from 'react-router-dom';
 import { NoteViewContext } from '../../contexts';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthService } from '../../features/authentication';
 
 export const Header: React.FC = () => {
@@ -44,14 +44,14 @@ export const Header: React.FC = () => {
 
   return (
     <Center>
-      <Group justify="space-between" p="md" w="80rem" wrap="nowrap">
+      <Group justify='space-between' p='md' w='80rem' wrap='nowrap'>
         <Group>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
             <Title order={1}>Notes</Title>
           </Link>
         </Group>
         <TextInput
-          placeholder="Search notes..."
+          placeholder='Search notes...'
           leftSection={<BsSearch size={14} />}
           className={styles.searchInput}
           value={searchQuery}
@@ -74,7 +74,7 @@ export const Header: React.FC = () => {
                   <BsPerson style={{ width: rem(14), height: rem(14) }} />
                 }
                 component={Link}
-                to="/user"
+                to='/user'
               >
                 Profile
               </Menu.Item>
