@@ -24,15 +24,15 @@ export const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
   return (
     <>
       <Card
-        shadow="sm"
-        radius="md"
+        shadow='sm'
+        radius='md'
         withBorder
         w={600}
         mih={100}
         onClick={handleCardClick}
         style={{ cursor: 'pointer' }}
       >
-        <Stack gap="xs" style={{ flex: 1 }}>
+        <Stack gap='xs' style={{ flex: 1 }}>
           <Title
             order={5}
             lineClamp={2}
@@ -41,8 +41,8 @@ export const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
             <HighlightedText text={note.title} highlight={searchQuery} />
           </Title>
           <Text
-            component="span"
-            size="sm"
+            component='span'
+            size='sm'
             style={{
               overflow: 'hidden',
               textOverflow: 'ellipsis',

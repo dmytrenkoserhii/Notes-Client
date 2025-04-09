@@ -1,5 +1,5 @@
-import { Box, Card, Center, Textarea, TextInput } from '@mantine/core';
 import React from 'react';
+import { Box, Card, Center, Textarea, TextInput } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import { CreateNoteSchema } from '../schemas';
 import { useForm, zodResolver } from '@mantine/form';
@@ -62,8 +62,8 @@ export const CreateNoteForm: React.FC = () => {
     <Center>
       <Card
         ref={ref}
-        shadow="xs"
-        p="xs"
+        shadow='xs'
+        p='xs'
         withBorder
         onClick={() => !isExpanded && setIsExpanded(true)}
         miw={400}
@@ -72,13 +72,13 @@ export const CreateNoteForm: React.FC = () => {
           <form onSubmit={form.onSubmit(handleSubmit)}>
             <Box>
               <TextInput
-                placeholder="Title"
-                mb="sm"
+                placeholder='Title'
+                mb='sm'
                 {...form.getInputProps('title')}
                 autoFocus
               />
               <Textarea
-                placeholder="Take a note..."
+                placeholder='Take a note...'
                 autosize
                 minRows={2}
                 maxRows={6}

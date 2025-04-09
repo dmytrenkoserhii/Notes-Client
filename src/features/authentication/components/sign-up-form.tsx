@@ -58,76 +58,76 @@ export const SignUpForm: React.FC = () => {
 
   return (
     <Paper
-      shadow="md"
-      radius="md"
-      p="xl"
+      shadow='md'
+      radius='md'
+      p='xl'
       withBorder
       maw={450}
       miw={400}
       mih={600}
-      mx="auto"
+      mx='auto'
     >
-      <Title order={2} ta="center" mb="lg">
+      <Title order={2} ta='center' mb='lg'>
         Create an account
       </Title>
 
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Stack gap="md">
+        <Stack gap='md'>
           <TextInput
             required
-            label="Username"
-            placeholder="Your username"
-            size="md"
+            label='Username'
+            placeholder='Your username'
+            size='md'
             {...form.getInputProps('username')}
           />
 
           <TextInput
             required
-            label="Email address"
-            placeholder="hello@example.com"
-            size="md"
+            label='Email address'
+            placeholder='hello@example.com'
+            size='md'
             {...form.getInputProps('email')}
           />
 
           <PasswordInput
             required
-            label="Password"
-            placeholder="Your password"
-            size="md"
+            label='Password'
+            placeholder='Your password'
+            size='md'
             {...form.getInputProps('password')}
           />
 
           <PasswordInput
             required
-            label="Confirm password"
-            placeholder="Confirm your password"
-            size="md"
+            label='Confirm password'
+            placeholder='Confirm your password'
+            size='md'
             {...form.getInputProps('passwordConfirmation')}
           />
 
           <Checkbox
-            label="I accept the Terms and Privacy Policy"
+            label='I accept the Terms and Privacy Policy'
             {...form.getInputProps('terms', { type: 'checkbox' })}
           />
 
-          <Button type="submit" fullWidth size="md" mt="xl">
+          <Button type='submit' fullWidth size='md' mt='xl'>
             Register
           </Button>
         </Stack>
       </form>
 
-      <Divider label="Or continue with" labelPosition="center" my="lg" />
+      <Divider label='Or continue with' labelPosition='center' my='lg' />
 
-      <Button variant="outline" fullWidth size="md">
+      <Button variant='outline' fullWidth size='md'>
         <FcGoogle size={20} style={{ marginRight: '10px' }} />
         Google
       </Button>
 
-      <Group justify="apart" mt="xl">
-        <Anchor component={Link} to="/sign-in" size="sm">
+      <Group justify='apart' mt='xl'>
+        <Anchor component={Link} to='/sign-in' size='sm'>
           Already have an account? Log in
         </Anchor>
-        <Anchor component="button" size="sm">
+        <Anchor component='button' size='sm'>
           Need help?
         </Anchor>
       </Group>

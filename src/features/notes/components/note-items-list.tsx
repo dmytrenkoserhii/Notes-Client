@@ -26,8 +26,8 @@ export const NoteItemsList: React.FC<NoteCardsListProps> = ({
 
   if (isLoading) {
     return (
-      <Center h="50vh">
-        <Loader size="xl" />
+      <Center h='50vh'>
+        <Loader size='xl' />
       </Center>
     );
   }

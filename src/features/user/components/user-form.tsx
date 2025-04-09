@@ -74,37 +74,37 @@ export const UserForm: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Center h="50vh">
-        <Loader size="xl" />
+      <Center h='50vh'>
+        <Loader size='xl' />
       </Center>
     );
   }
 
   return (
-    <Container size="sm">
+    <Container size='sm'>
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Fieldset legend="Personal information">
-          <Stack gap="md">
+        <Fieldset legend='Personal information'>
+          <Stack gap='md'>
             <TextInput
-              label="Username"
-              placeholder="johndoe"
+              label='Username'
+              placeholder='johndoe'
               {...form.getInputProps('username')}
             />
 
             <TextInput
-              label="Phone"
-              placeholder="+1234567890"
+              label='Phone'
+              placeholder='+1234567890'
               {...form.getInputProps('phone')}
             />
 
             <DatePickerInput
-              label="Birth Date"
-              placeholder="Pick a date"
+              label='Birth Date'
+              placeholder='Pick a date'
               {...form.getInputProps('birthDate')}
             />
 
-            <Group justify="flex-end" mt="xl">
-              <Button type="submit" size="md">
+            <Group justify='flex-end' mt='xl'>
+              <Button type='submit' size='md'>
                 Save Changes
               </Button>
             </Group>

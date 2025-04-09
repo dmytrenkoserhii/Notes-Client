@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 
   const renderButtonContent = () => {
     if (isLoading) {
-      return <Loader color="white" size="sm" />;
+      return <Loader color='white' size='sm' />;
     }
     if (userData) {
       return 'Go to Notes';
@@ -35,29 +35,29 @@ const Home: React.FC = () => {
   const buttonLink = userData ? '/notes' : '/sign-in';
 
   return (
-    <Center h="100vh">
-      <Container size="lg" py="xl">
-        <Title order={1} ta="center" mb="xl">
+    <Center h='100vh'>
+      <Container size='lg' py='xl'>
+        <Title order={1} ta='center' mb='xl'>
           Welcome to Your Notes App
         </Title>
-        <Text ta="center" size="lg" mb="xl">
+        <Text ta='center' size='lg' mb='xl'>
           Organize your thoughts and ideas with ease.
         </Text>
 
-        <Card shadow="sm" p="lg" radius="md" withBorder maw={400} mx="auto">
-          <Stack h="100%" justify="space-between">
+        <Card shadow='sm' p='lg' radius='md' withBorder maw={400} mx='auto'>
+          <Stack h='100%' justify='space-between'>
             <Box>
               <Card.Section>
                 <FaFileAlt
                   size={50}
-                  color="cyan"
+                  color='cyan'
                   style={{ margin: '1rem auto', display: 'block' }}
                 />
               </Card.Section>
-              <Title order={3} ta="center" mb="md">
+              <Title order={3} ta='center' mb='md'>
                 Notes
               </Title>
-              <Text ta="center" mb="md">
+              <Text ta='center' mb='md'>
                 View and manage all your notes in one place.
               </Text>
             </Box>
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
               component={Link}
               to={buttonLink}
               fullWidth
-              variant="gradient"
+              variant='gradient'
               gradient={{ from: 'cyan', to: 'teal', deg: 105 }}
             >
               {renderButtonContent()}

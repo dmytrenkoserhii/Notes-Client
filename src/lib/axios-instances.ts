@@ -25,7 +25,7 @@ privateAxios.interceptors.response.use(
       }
 
       try {
-        await publicAxios.get(`/auth/refresh`);
+        await publicAxios.get('/auth/refresh');
         return privateAxios(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);

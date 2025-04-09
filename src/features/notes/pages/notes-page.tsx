@@ -1,14 +1,16 @@
-import { Box, Flex } from '@mantine/core';
 import React from 'react';
-import { Sort } from '../components';
-import { NoteCardsList } from '../components';
-import { CreateNoteForm } from '../components';
-import { NoteItemsList } from '../components';
-import { NoteViewContext } from '../../../contexts';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { Box, Flex } from '@mantine/core';
+import {
+  NoteCardsList,
+  CreateNoteForm,
+  NoteItemsList,
+  Sort,
+} from '../components';
+import { NoteViewContext } from '../../../contexts';
 import { getCurrentQueryParams } from '../../../utils';
 import { NotesService } from '../services';
-import { useQuery } from '@tanstack/react-query';
 import { NotesQueryParams } from '../types';
 import { SORT_OPTIONS } from '../constants';
 
@@ -73,12 +75,12 @@ export const NotesPage: React.FC = () => {
 
   return (
     <Box>
-      <Flex justify="space-between" align="center">
-        <Box w="33%" />
+      <Flex justify='space-between' align='center'>
+        <Box w='33%' />
 
         <CreateNoteForm />
 
-        <Box w="33%" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box w='33%' style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Sort value={queryParams.sort} onSortChange={handleSortChange} />
         </Box>
       </Flex>

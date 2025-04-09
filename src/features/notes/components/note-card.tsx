@@ -63,8 +63,8 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   return (
     <>
       <Card
-        shadow="sm"
-        radius="md"
+        shadow='sm'
+        radius='md'
         withBorder
         w={250}
         h={110}
@@ -74,10 +74,10 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
         {note.isDeleted && (
           <>
             <ActionIcon
-              color="cyan"
-              variant="filled"
-              radius="xl"
-              size="sm"
+              color='cyan'
+              variant='filled'
+              radius='xl'
+              size='sm'
               style={{
                 position: 'absolute',
                 top: '8px',
@@ -89,13 +89,13 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
                 handleRestore();
               }}
             >
-              <MdRestore size="1rem" />
+              <MdRestore size='1rem' />
             </ActionIcon>
             <ActionIcon
-              color="red"
-              variant="filled"
-              radius="xl"
-              size="sm"
+              color='red'
+              variant='filled'
+              radius='xl'
+              size='sm'
               style={{
                 position: 'absolute',
                 top: '8px',
@@ -104,11 +104,11 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
               }}
               onClick={handleDelete}
             >
-              <MdDelete size="1rem" />
+              <MdDelete size='1rem' />
             </ActionIcon>
           </>
         )}
-        <Stack gap="xs" style={{ flex: 1 }}>
+        <Stack gap='xs' style={{ flex: 1 }}>
           <Title
             order={5}
             lineClamp={1}
@@ -117,8 +117,8 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
             <HighlightedText text={note.title} highlight={searchQuery} />
           </Title>
           <Text
-            component="div"
-            size="sm"
+            component='div'
+            size='sm'
             style={{
               overflow: 'hidden',
               textOverflow: 'ellipsis',

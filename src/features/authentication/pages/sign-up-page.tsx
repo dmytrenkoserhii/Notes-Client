@@ -4,7 +4,7 @@ import { SignUpForm } from '../components';
 
 export const SignUpPage: React.FC = () => {
   return (
-    <Center h="100vh">
+    <Center h='100vh'>
       <SignUpForm />
     </Center>
   );
